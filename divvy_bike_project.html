@@ -172,8 +172,6 @@ In particular, I am using male/female  median age, number of residents over 16, 
 
 </p>
 
-<p>
-
 </div>
 
 
@@ -222,7 +220,128 @@ Remember to include pictures here!!!!!
 
 
 
+<p>
+<strong> Divvy Trips and Divvy Station </strong> : code for this part is included in a single jupyter notebook: Need to add link to this notebook
+</p>
 
+<p> By iterating over station name and summarize the number of trips start and end at each station, I am able to get the top five popular stations to start trips and end trips. Four of these stations are on both lists. These stations are mostly located near office buildings, public transporations with one located on lakeshore front, which is used by people to bike along the lake. This verifies our assumption that divvy bike is mostly used by commuters for the last mile. 
+
+</p>
+
+<p> I also found evidence for the rational behind divvy's management when they decide how many bikes each station need, which is very intuitive. If there are more trips start from a station, then put more bikes there. If more trips are ended for a station, then do not put as many bikes there since when bikes are returned, it is equivalent to adding supply of bikes. They definitely do not want there to be more bikes returned than the max number of docks! 
+When 1000 more trips are started from a station, they put one more bike in supply. wHEN 1000 more trips are ended there, put 2 fewer bikes there. 
+
+</p>
+
+<p> 
+But! It is important to note that a potential reverse causation also exist. Just because there are more bikes there, people are more likely to start trips from that specific station. See the plot below which demonstrates a pretty clear positive correlation between the two numbers. 
+
+</p>
+
+
+Add graph here
+
+<p> Without any more information, I am unable to investigate this question further nor tell which direction of the causality is the driving force. 
+
+</p>
+
+
+<p>
+<strong> Spatial Analysis </strong> : code for this part and the next part is included in a single jupyter notebook: Need to add link to this notebook
+</p>
+
+
+<p> With shapefile for census tract and coordinates for divvy stations, I am able to compute the total number of divvy stations by each census tract and plot divvy station distribution by census tract on a map. See the plot below. 
+
+</p>
+
+Insert picture HERE!!!!!
+
+<p> Once again, not surprinsly, downtown has more divvy stations than other areas. 
+And now it is finally the time to investigate the major question: divvy is not cheap, so user need to have some level of financial flexibility in order to afford the service. But in terms of location, though downtown areas are better off than the south and west neighborhoods, it is certainly not the richest neighbohood in Chicago. In order to decompose this question further, we need to conduct regressional analysis
+
+</p>
+
+
+<p>
+<strong> Regressional Analysis </strong> : see code  Link here: 
+</p>
+
+
+
+<p>
+<strong> The Baseline Model  </strong> : NEED TO CHANGE FONT
+</p>
+
+
+<p>
+We start with the simplest model possible: number of divvy stations within census tract ~ median household income of census tract + constant
+
+</p>
+
+<p> It is a pretty weak model only with a 5% R-squared. The coefficient on median household income is positive and significant but the scale is not convenient to interpret. Thus, I scaled all variables on income into thousands of dollars for the rest of this analysis. The low R-squared suggest more relevant explanatory variables should be added in. Therefore the elevated model below is produced. 
+
+</p>
+
+<p>
+<strong> A More Complex Model  </strong> : NEED TO CHANGE FONT
+</p>
+
+
+<p> Out of all the variables included, the ones with relatively significant coefficients are: White Median Income, Male Median Age, Female Median Age. We discuss the interpretations one by one. </p>
+
+
+<p> White median income: 0.0101. Significant at 90% confidence interval. When the median income for whites increase by 100(k), on average there is one more divvy bike station in that neighborhood.</p>
+
+
+<p>Male Median Age: 0.15. As male median age increase by one, divvy station is expected to increase by 0.15. Whis is the same as saying, male median age increase by around 7 years, on average there should be one more divvy station in the neighborhood. It is not hard to realize that divvy is not designed for the elders so maybe there is decline in divvy station after we reach a certain point. so we will include a quadratic term for age in the next round of regression. </p>
+
+
+<p>On the contrary, Female Median Age: -0.18. Highly significant. As female median age increase by one, divvy station is expected to DECREASE by 0.18. Whis is the same as saying, female median age increase by around 5 years, on average there should be one FEWER divvy station in the neighborhood.</p>
+
+
+Next we add in the quadratic term age and number of people over 16 living in that neighborhood
+
+<p>
+<strong> The Non-Linear Model  </strong> : NEED TO CHANGE FONT
+</p>
+
+
+<p> With this model, we get the best fitting model with R -squared value 0.325. Variables significant: White median income, Male population over 16. Number of Families. interpretations for the first two do not change much. </p> 
+
+<p> Number of families is an interesting one: we notice number of families increase by 1000, divvy station number decrease by 3. Maybe from this, we could say divvy is not so family friendly since it is true that families are more likely to have cars. if people have cars, they do not really use divvy bike.</p>
+
+
+<p> Although the coefficients on age and age squared are not significant, it is still interesting to interpret.
+For male: 0.7121/(2*-0.009) = 39. Which suggests, before age 39, the bigger the median male age, the more divvy station. but after age 39, the relationship is no longer positive. Which makes sense according to our summary of statistics on users. not many people over age 44 use divvy bikes anyway  </p>
+
+
+<p> For Female: (-0.6369)/(2*0.008) = 39! very interesting right? before 39, the bigger the median female age, the fewer divvy station in their neighborhood. after 39, the bigger the median female age, the more divvy stations.
+Male age and female age have exactly the opposite relationship to divvy stations in their neighborhood!</p> 
+
+
+
+<p> Why? we have a few hypothesis but unfortunately due to the limited scope of this project, we are unable to test any of them below
+1) it could be after 39 years old, women have kids who are old enough to use divvy bikes 2) it could be behavioral differences among males and females: younger males are more prone to innovations and new tools versus elders females are drawn to this type of things </p>
+
+
+<p>
+<strong> The Logit Model: Likelihood of Having A Divvy Station  </strong> : NEED TO CHANGE FONT
+</p>
+
+
+<p>
+Instead of only thinking about how income influence the number of divvy stations in the neighborhood, we can also think about it from a different angle: how does socio economic factors influence whether a neighborhood has access to divvy or not. 
+</p>
+
+<p> For this reason, I created a dummy variable for having divvy (no matter how many) as 1 and not having as 0 and testted a logit model. 
+</p>
+
+<p> 
+
+In the logit model, household income by race, median age by sex and over 16 population by sex all matter. Since it is in logs, the interpretation of scale will be pretty odd so we will focus on the sign here. </p>
+
+<p> White household median higher, more likely to have access to divvy. Black income higher, less likely instead. Having more males in the neighborhood helps having divvy stations whereas having females actually hurt. 
 
 
 </div>
@@ -235,6 +354,15 @@ Remember to include pictures here!!!!!
 
 <h4><em>Conclusion and Recommendations</em></h4>
 
+<p>
+In this study, we verified that there is big seasonality and location specific effect of divvy bikes usage and divvy bike access and we suggest the location specific effects are closely tied to the income, age, race and sex composition of a neighborhood. Higher income, more rich white households, more people in 20-40 age group and more males are positively correlated with divvy access. Without further information, we do not hope to leave the impression that Divvy Bike is biased against their potential users due to socio economic or demographic factors. 
+</p>
+
+<p>
+
+For others who are interested in similar questions on Divvy and socio-economic factors, it is important for them to add individual level data to improve the accuracy and complexity of their analysis. 
+
+</p>
 
 
 	
