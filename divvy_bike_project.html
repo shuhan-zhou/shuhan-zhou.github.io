@@ -238,12 +238,6 @@ Customers on average on each trip use divvy bikes 20 mins more than subscribers.
 </p>
 
 
-
-
-Remember to include pictures here!!!!!
-
-
-
 <p>
 <strong> Divvy Trips and Divvy Station </strong> : code for this part is included in a single jupyter notebook: <a href= "https://github.com/shuhan-zhou/divvy_new/blob/master/Trips_Stations.ipynb"> Divvy Trips and Stations </a>
 
@@ -257,6 +251,11 @@ Remember to include pictures here!!!!!
 <p> I also found evidence for the rational behind divvy's management when they decide how many bikes each station need, which is very intuitive. If there are more trips start from a station, then put more bikes there. If more trips are ended for a station, then do not put as many bikes there since when bikes are returned, it is equivalent to adding supply of bikes. They definitely do not want there to be more bikes returned than the max number of docks! 
 When 1000 more trips are started from a station, they put one more bike in supply. wHEN 1000 more trips are ended there, put 2 fewer bikes there. 
 
+<p>
+<img src="/figure/trip_station_ols.png" width="300" height="230">
+</p>
+
+
 </p>
 
 <p> 
@@ -264,8 +263,10 @@ But! It is important to note that a potential reverse causation also exist. Just
 
 </p>
 
+<p>
+<img src="/figure/trip_dock_in_service.png" width="300" height="230">
+</p>
 
-Add graph here
 
 <p> Without any more information, I am unable to investigate this question further nor tell which direction of the causality is the driving force. 
 
