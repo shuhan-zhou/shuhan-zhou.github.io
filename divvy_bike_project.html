@@ -252,7 +252,7 @@ Customers on average on each trip use divvy bikes 20 mins more than subscribers.
 When 1000 more trips are started from a station, they put one more bike in supply. wHEN 1000 more trips are ended there, put 2 fewer bikes there. 
 
 <p>
-<img src="/figure/trip_station_ols.png" width="300" height="500">
+<img src="/figure/trip_station_ols.png" width="300" height="400">
 </p>
 
 
@@ -283,7 +283,12 @@ But! It is important to note that a potential reverse causation also exist. Just
 
 </p>
 
-Insert picture HERE!!!!!
+<p>
+<img src="/figure/Divvy_Station_Map.png" width="300" height="400">
+</p>
+
+
+
 
 <p> Once again, not surprinsly, downtown has more divvy stations than other areas. 
 And now it is finally the time to investigate the major question: divvy is not cheap, so user need to have some level of financial flexibility in order to afford the service. But in terms of location, though downtown areas are better off than the south and west neighborhoods, it is certainly not the richest neighbohood in Chicago. In order to decompose this question further, we need to conduct regressional analysis
@@ -292,28 +297,43 @@ And now it is finally the time to investigate the major question: divvy is not c
 
 
 <p>
-<strong> Regressional Analysis </strong> : see code  Link here: 
+<strong> Regressional Analysis </strong> : see code <a href= "https://github.com/shuhan-zhou/divvy_new/blob/master/Socioeconomic_Factors.ipynb"> Spatial and Regression Analysis </a>
 </p>
 
 
 
 <p>
-<strong> The Baseline Model  </strong> : NEED TO CHANGE FONT
+<strong> The Baseline Model  </strong> : 
 </p>
 
 
 <p>
 We start with the simplest model possible: number of divvy stations within census tract ~ median household income of census tract + constant
-
 </p>
+
+
+<p>
+<img src="/figure/baseline_ols.png" width="200" height="300">
+</p>
+
+
+
 
 <p> It is a pretty weak model only with a 5% R-squared. The coefficient on median household income is positive and significant but the scale is not convenient to interpret. Thus, I scaled all variables on income into thousands of dollars for the rest of this analysis. The low R-squared suggest more relevant explanatory variables should be added in. Therefore the elevated model below is produced. 
 
 </p>
 
 <p>
-<strong> A More Complex Model  </strong> : NEED TO CHANGE FONT
+<strong> A More Complex Model  </strong> : 
 </p>
+
+
+
+<p>
+<img src="/figure/better_ols.png" width="200" height="300">
+</p>
+
+
 
 
 <p> Out of all the variables included, the ones with relatively significant coefficients are: White Median Income, Male Median Age, Female Median Age. We discuss the interpretations one by one. </p>
@@ -331,8 +351,14 @@ We start with the simplest model possible: number of divvy stations within censu
 Next we add in the quadratic term age and number of people over 16 living in that neighborhood
 
 <p>
-<strong> The Non-Linear Model  </strong> : NEED TO CHANGE FONT
+<strong> The Non-Linear Model  </strong> : 
 </p>
+
+<p>
+<img src="/figure/nonlinear_ols.png" width="200" height="300">
+</p>
+
+
 
 
 <p> With this model, we get the best fitting model with R -squared value 0.325. Variables significant: White median income, Male population over 16. Number of Families. interpretations for the first two do not change much. </p> 
@@ -354,8 +380,11 @@ Male age and female age have exactly the opposite relationship to divvy stations
 
 
 <p>
-<strong> The Logit Model: Likelihood of Having A Divvy Station  </strong> : NEED TO CHANGE FONT
+<strong> The Logit Model: Likelihood of Having A Divvy Station  </strong> : 
 </p>
+
+
+
 
 
 <p>
@@ -364,6 +393,12 @@ Instead of only thinking about how income influence the number of divvy stations
 
 <p> For this reason, I created a dummy variable for having divvy (no matter how many) as 1 and not having as 0 and testted a logit model. 
 </p>
+
+
+<p>
+<img src="/figure/logit.png" width="200" height="300">
+</p>
+
 
 <p> 
 
