@@ -109,9 +109,7 @@ In order to answer questions like this, we need to investigate user behaviors in
 	
 In this project, I analyze the number of trips undertaken by various populations, during different time or season of the year, correlation between where divvy stations are located with how popular they are, and last but least, the role income, racial, age snapshot of a census tract plays in determining divvy bike's availibility. 
 
-<p>
 
-</p>
 
 
 <div id = "Data">
@@ -121,22 +119,48 @@ In this project, I analyze the number of trips undertaken by various populations
 
 <p>
 
-Due to the extremely large size (over 10million rows in csv) of data for all years available (2013-2017) is beyond the scope of this project's capacity without adding much benefit to the analysis, I decided to focus the analysis on 2017. The dataset used can be downloaded from 
+Due to the extremely large size (over 10million rows in csv) of data for all years available (2013-2017) is beyond the scope of this project's capacity without adding much benefit to the analysis, I decided to focus the analysis on 2017. The dataset used can be downloaded from:
+
+<p>
 
 <strong> Divvy Bike Trip from its official website </strong> : <a href=https://www.divvybikes.com/system-data>here</a>
 
+This datset stores detailed data for each trip happened on any divvy bike: type of user, gender and age of user (for those who subscribe to monthly service), time specific to second when the trip starts and ends, station name and location of where the trip starts/ends and the time duration of the trip (also in seconds).
+
+</p>
+
+<p>
 
 <strong> Divvy Bike Station from City of Chicago's Data Portal </strong> : <a href=https://data.cityofchicago.org/Transportation/Divvy-Bicycle-Stations-All-Map/bk89-9dk7/data>here</a>
 
 
+This table includes information on station location (as in street crossroads), geographic location (longitude and lattitude) as well as the number of divvy bikes on dock at the station. 
 
+</p>
+
+
+<p>
 <strong> Income by Census Tract: 2011-2015 American Community Survey 5-Year Estimates </strong> : <a href=https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk>here</a>
 
 
+Specifically, I am selecting median household income, median white household income, median black household income to reflec the income situation of a census tract. 
+</p>
+
+<p>
+
 <strong> Socio-Demographic Data by Census Tract: 2010 US Census Demographic Profile shapefile format</strong> : <a href=https://www.census.gov/geo/maps-data/data/tiger-data.html>here</a>
 
+In particular, I am using male/female  median age, number of residents over 16, total white/black population, number of families and house vacancy rate. 
+</p>
+
+
+<p>
 <strong> Illinois Census Tract Shapefile </strong> : <a href=https://www.census.gov/geo/maps-data/data/cbf/cbf_tracts.html>here</a>
 
+
+
+
+</p>
 
 <p>
 
